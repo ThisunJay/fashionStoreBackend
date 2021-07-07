@@ -7,7 +7,7 @@ const morgan = require("morgan");
 const multer = require("multer");
 const upload = multer({ dest: "uploads/profilepic/" });
 //define server running port
-let port = 4000;
+let port = process.env.PORT || 4000;
 
 const MongoClient = require("mongodb").MongoClient;
 
