@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const multer = require("multer");
 const upload = multer({ dest: "uploads/profilepic/" });
+const path = require('path');
 //define server running port
 let port = process.env.PORT || 4000;
 
@@ -56,8 +57,13 @@ mongoose.set("useCreateIndex", true);
 //======================================================================================================
 //=================================== defines routes     ===============================================
 //======================================================================================================
-
+app.use(express.static(path.join(__dirname, "build")));
 //user routes
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"))
+  // res.json(path.join(__dirname, "build", "index.html"))
+});
+
 app.use("/cart", cartRoutes);
 
 app.use("/user", userRoutes);
